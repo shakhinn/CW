@@ -150,20 +150,32 @@ int task4(Text* text){
 
 /////////////////////////////////////////////////////////////////////
 
-void change(Sentence* sent , int i){
-    wchar_t* letter = (wchar_t*)malloc((sent->lensent -i -1) * sizeof(wchar_t));
+void change1(Sentence* sent, int i){
+    wchar_t* letter = (wchar_t*)malloc((sent->lensent -i) * sizeof(wchar_t));
     wcscpy(letter, L"ь");
     wcscpy(letter + 1, sent->buf + i + 1);
-    sent->lensent += 1;
+    sent->lensent += 2;
     sent->buf = (wchar_t*)realloc(sent->buf, sent->lensent * sizeof(wchar_t));
     wcscpy(sent->buf + i + 1, letter);
     free(letter);
 }
 
+void change2(Sentence* sent, int i){
+    for(int j = i+1; j < wcslen(sent->buf); j++){
+        sent->buf[j] = sent->buf[j+1];
+        sent->lensent -=1;
+    }
+    //sent->buf = (wchar_t*)realloc(sent->buf, sent->lensent * sizeof(wchar_t));
+}
+
 void findtsja(Sentence* sent){
     for (int i = 1; i < sent->lensent - 3; i++){
         if(iswalnum(sent->buf[i - 1]) && sent->buf[i] == L'т' && sent->buf[i+1] == L'с' && sent->buf[i+2] == L'я' && (sent->buf[i+3] == L'.' || sent->buf[i+3] == L' ' || sent->buf[i+3] == ',')){
-            change(sent, i);
+            change1(sent, i);
+        }else if (iswalnum(sent->buf[i - 1]) && sent->buf[i] == L'т' && sent->buf[i+1] == L'ь' && sent->buf[i+2] == L'с' && sent->buf[i+3] == L'я' && (sent->buf[i+4] == L'.' || sent->buf[i+4] == L' ' || sent->buf[i+4] == ',')) {
+            change2(sent, i);
+        /*if (iswalnum(sent->buf[i - 1]) && sent->buf[i] == L'т' && sent->buf[i+1] == L'ь' && sent->buf[i+2] == L'с' && sent->buf[i+3] == L'я' && (sent->buf[i+4] == L'.' || sent->buf[i+4] == L' ' || sent->buf[i+4] == ',')) {
+            change2(sent, i);*/
         }
     }
 }
@@ -188,6 +200,7 @@ int main(){
     //task4(text);
     //task3(text);
     task1(text);
+    //task3(text);
     for(int i = 0; i < text->sizetext; i++) {
         wprintf(L"%ls\n", text->sentences[i]->buf);
 
