@@ -2,6 +2,8 @@
 #include <wchar.h>
 #include <locale.h>
 #include <wctype.h>
+#include <stdio.h>
+
 #define SENT_SIZE 10
 #define TEXT_SIZE 10
 
@@ -46,7 +48,7 @@ void readsent(Sentence* sent){
         }
         sent->buf[sent->lensent++] = wc;
     }while (!wcschr(L".\n", wc));
-    sent->buf[sent->lensent] = L'\0';
+    sent->buf[sent->lensent++] = L'\0';
 }
 
 int samecheck(Text* text, Sentence* sent){
@@ -96,6 +98,7 @@ void printmenu(){
             "    6. Выход из программы.                                                                                                /\n/"
             "                                              Для выбора введите номер пункта                                             /\n/"
             "==========================================================================================================================/\n");
+    fflush(stdin);
 }
 
 
@@ -151,7 +154,7 @@ int task4(Text* text){
 /////////////////////////////////////////////////////////////////////
 
 void change1(Sentence* sent, int i){
-    wchar_t* letter = (wchar_t*)malloc((sent->lensent -i) * sizeof(wchar_t));
+    wchar_t* letter = (wchar_t*)malloc((sent->lensent - i) * sizeof(wchar_t));
     wcscpy(letter, L"ь");
     wcscpy(letter + 1, sent->buf + i + 1);
     sent->lensent += 2;
@@ -161,10 +164,10 @@ void change1(Sentence* sent, int i){
 }
 
 void change2(Sentence* sent, int i){
-    for(int j = i+1; j < wcslen(sent->buf); j++){
+    for(int j = i + 1; j < sent->lensent; j++){
         sent->buf[j] = sent->buf[j+1];
-        sent->lensent -=1;
     }
+    sent->lensent -= 1;
     //sent->buf = (wchar_t*)realloc(sent->buf, sent->lensent * sizeof(wchar_t));
 }
 
@@ -174,8 +177,8 @@ void findtsja(Sentence* sent){
             change1(sent, i);
         }else if (iswalnum(sent->buf[i - 1]) && sent->buf[i] == L'т' && sent->buf[i+1] == L'ь' && sent->buf[i+2] == L'с' && sent->buf[i+3] == L'я' && (sent->buf[i+4] == L'.' || sent->buf[i+4] == L' ' || sent->buf[i+4] == ',')) {
             change2(sent, i);
-        /*if (iswalnum(sent->buf[i - 1]) && sent->buf[i] == L'т' && sent->buf[i+1] == L'ь' && sent->buf[i+2] == L'с' && sent->buf[i+3] == L'я' && (sent->buf[i+4] == L'.' || sent->buf[i+4] == L' ' || sent->buf[i+4] == ',')) {
-            change2(sent, i);*/
+            /*if (iswalnum(sent->buf[i - 1]) && sent->buf[i] == L'т' && sent->buf[i+1] == L'ь' && sent->buf[i+2] == L'с' && sent->buf[i+3] == L'я' && (sent->buf[i+4] == L'.' || sent->buf[i+4] == L' ' || sent->buf[i+4] == ',')) {
+                change2(sent, i);*/
         }
     }
 }
@@ -195,10 +198,10 @@ int main(){
     Text* text = (Text*)malloc(sizeof(Text));
     maketext(text);
     readtext(text);
-    //printmenu();
+    printmenu();
     //wprintf(L"Введите число: ");
     //task4(text);
-    //task3(text);
+    //task3(text); //работает
     task1(text);
     //task3(text);
     for(int i = 0; i < text->sizetext; i++) {
