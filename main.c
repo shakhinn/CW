@@ -207,34 +207,35 @@ wchar_t* FindSecondWord(Sentence *sent) {
 
 }
 
-int PrintWithSecondWord(Sentence* sent, wchar_t* word){
+int PrintWithSecondWord(Sentence* sent, wchar_t* word) {
     size_t len = wcslen(sent->buf);
     size_t n = wcslen(word);
-    wchar_t* pwc;
+    wchar_t *pwc;
     size_t end = 0;
     pwc = wcsstr(sent->buf, word); // поиск первого вхождения слова
-    if(pwc == NULL)  // если слова нет, то выходим
-        return 1;
     while (pwc != NULL) { // пока есть слово выводим
         size_t dist = pwc - sent->buf;
-        if ((sent->buf[dist + n] == L' ' || sent->buf[dist + n] == L',' || sent->buf[dist + n] == L'.') && (sent->buf[dist - 1 ] == L' ' || dist == 0)){ // проверка что это слово а не просто вхлждение
-            for(int i = 0; i < dist; i++){  // выводим символы до слова
+        if ((sent->buf[dist + n] == L' ' || sent->buf[dist + n] == L',' || sent->buf[dist + n] == L'.') &&
+            (sent->buf[dist - 1] == L' ' || dist == 0)) { // проверка что это слово а не просто вхлждение
+            for (int i = end; i < dist; i++) {  // выводим символы до слова
                 wprintf(L"\033[0;30m" L"%lc", sent->buf[i]);
             }
-            for(int j = dist; j < dist + n; j++){ // выводим слово
+            for (int j = dist; j < dist + n; j++) { // выводим слово
                 wprintf(L"\033[0;32m" L"%lc", sent->buf[j]);
             }
             end = dist + n;
             pwc = wcsstr(pwc + 1, word); // проверяем есть ли ещё
         } else
             pwc = wcsstr(pwc + 1, word);
-        }
+
+    }
+
     if(end < len){ // выводим то что после слова если оно не стоит в конце предложения
-        for(int k = end; k < len; k++){
+        for(int k = end; k < len; k++) {
             wprintf(L"\033[0;30m" L"%lc", sent->buf[k]);
         }
-    wprintf(L"\033[0;30m" L"\n");
     }
+    wprintf(L"\033[0;30m" L"\n");
     return 0;
 }
 
@@ -243,9 +244,8 @@ int task2(Text* text){
     word = FindSecondWord(text->sentences[0]);
     if(word == NULL)
         return 1;
-    for(int i = 0; i<text->sizetext; i++){
-        if(PrintWithSecondWord(text->sentences[i], word) == 1)
-            continue;
+    for(int i = 0; i<text->sizetext; i++) {
+        PrintWithSecondWord(text->sentences[i], word);
     }
     free(word);
     return 0;
@@ -279,8 +279,8 @@ int main(){
                     wprintf(L"\nError");
                 break;
             case 2:
-                    (task2(text));
-                    break;
+                task2(text);
+                break;
 
             case 3:
                 if(task3(text) == 0){
