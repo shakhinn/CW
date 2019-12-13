@@ -2,8 +2,10 @@
 #include <wchar.h>
 #include <locale.h>
 #include <wctype.h>
+
 #define SENT_SIZE 10
 #define TEXT_SIZE 10
+
 
 typedef struct Sentence{
     wchar_t * buf;
@@ -46,7 +48,7 @@ void readsent(Sentence* sent){
         }
         sent->buf[sent->lensent++] = wc;
     }while (!wcschr(L".\n", wc));
-    sent->buf[sent->lensent] = L'\0';
+    sent->buf[sent->lensent++] = L'\0';
 }
 
 int samecheck(Text* text, Sentence* sent){
@@ -77,12 +79,8 @@ void readtext(Text* text){
                     text->sentences = (Sentence **) realloc(text->sentences, text->maxsizet * sizeof(Sentence *));
                 }
             }
-
         }
-
     }
-
-
 }
 
 void printmenu(){
@@ -97,8 +95,6 @@ void printmenu(){
             "                                              Для выбора введите номер пункта                                             /\n/"
             "==========================================================================================================================/\n");
 }
-
-
 
 int countwords(Sentence* sent){
     int k = 0;
@@ -148,10 +144,8 @@ int task4(Text* text){
     return 0;
 }
 
-/////////////////////////////////////////////////////////////////////
-
 void change1(Sentence* sent, int i){
-    wchar_t* letter = (wchar_t*)malloc((sent->lensent -i) * sizeof(wchar_t));
+    wchar_t* letter = (wchar_t*)malloc((sent->lensent - i) * sizeof(wchar_t));
     wcscpy(letter, L"ь");
     wcscpy(letter + 1, sent->buf + i + 1);
     sent->lensent += 2;
@@ -161,19 +155,19 @@ void change1(Sentence* sent, int i){
 }
 
 void change2(Sentence* sent, int i){
-    for(int j = i+1; j < sent->lensent; j++){
+    for(int j = i + 1; j < sent->lensent; j++){
         sent->buf[j] = sent->buf[j+1];
-        sent->lensent -=1;
     }
-    //sent->buf = (wchar_t*)realloc(sent->buf, sent->lensent * sizeof(wchar_t));
+    sent->lensent -= 1;
 }
 
 void findtsja(Sentence* sent){
     for (int i = 1; i < sent->lensent - 3; i++){
         if(iswalnum(sent->buf[i - 1]) && sent->buf[i] == L'т' && sent->buf[i+1] == L'с' && sent->buf[i+2] == L'я' && (sent->buf[i+3] == L'.' || sent->buf[i+3] == L' ' || sent->buf[i+3] == ',')){
             change1(sent, i);
+        }else if (iswalnum(sent->buf[i - 1]) && sent->buf[i] == L'т' && sent->buf[i+1] == L'ь' && sent->buf[i+2] == L'с' && sent->buf[i+3] == L'я' && (sent->buf[i+4] == L'.' || sent->buf[i+4] == L' ' || sent->buf[i+4] == ',')) {
+            change2(sent, i);
         }
-
     }
 }
 
@@ -186,24 +180,92 @@ int task1(Text* text){
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+wchar_t* FindSecondWord(Sentence *sent) {
+    int i = 0;
+    while (sent->buf[i] != L' ' && sent->buf[i] != L',' && sent->buf[i] != L'.' && i < sent->lensent) {
+        i++;
+    }
+    if (i >= sent->lensent)
+        return NULL;
+    int j = i+1;
+    int n = 0;
+
+    while (sent->buf[j] != L' ' && sent->buf[j] != L',' && sent->buf[j] != L'.' && j < sent->lensent) {
+        n++;
+        j++;
+    }
+    wchar_t *pwc = malloc((n+2)* sizeof(wchar_t));
+    int a = 0;
+    for (int k = i+1; k < n+i+1; k++){
+        pwc[a] = sent->buf[k];
+        a++;
+    }
+
+    pwc[n] = L'\0';
+    return pwc;
+
+}
+
+int PrintWithSecondWord(Sentence* sent, wchar_t* word){
+    size_t len = wcslen(sent->buf);
+    size_t n = wcslen(word);
+    wchar_t* pwc;
+    size_t end = 0;
+    pwc = wcsstr(sent->buf, word); // поиск первого вхождения слова
+    if(pwc == NULL)  // если слова нет, то выходим
+        return 1;
+    while (pwc != NULL) { // пока есть слово выводим
+        size_t dist = pwc - sent->buf;
+        if (sent->buf[dist + n] == L' ' || sent->buf[dist + n] == L',' || sent->buf[dist + n] == L'.'){ // проверка что это слово а не просто вхлждение
+            for(int i = 0; i < dist; i++){  // выводим символы до слова
+                wprintf(L"%lc", sent->buf[i]);
+            }
+            for(int j = dist; j < n; j++){ // выводим слово
+                //wprintf(L"%lc", sent->buf[j]);
+                wprintf(L"BIG");
+            }
+            end = dist + n;
+            pwc = wcsstr(pwc + 1, word); // проверяем есть ли ещё
+        } else
+            pwc = wcsstr(pwc + 1, word);
+        }
+    if(end < len){ // выводим то что после слова если оно не стоит в конце предложения
+        for(int k = end; k < len; k++){
+            wprintf(L"%lc", sent->buf[k]);
+        }
+    wprintf(L"\n");
+    }
+    return 0;
+}
+
+int task2(Text* text){
+    wchar_t * word;
+    word = FindSecondWord(text->sentences[0]);
+    if(word == NULL)
+        return 1;
+    for(int i = 0; i<text->sizetext; i++){
+        if(PrintWithSecondWord(text->sentences[i], word) == 1)
+            continue;
+    }
+    return 0;
+}
+
+////////////////////////////////////////////////////////////////////////////////
 int main(){
     setlocale( LC_ALL, "ru_RU.UTF-8");
-    wprintf(L"Введите текст. Текст должен заканчитаться символом переноса строки\n");
+    wprintf(L"Введите текст. Текст должен заканчиваться символом переноса строки\n");
     Text* text = (Text*)malloc(sizeof(Text));
     maketext(text);
     readtext(text);
     //printmenu();
     //wprintf(L"Введите число: ");
     //task4(text);
-    //task3(text);
+    //task3(text); //работает
     //task1(text);
-    task3(text);
-    for(int i = 0; i < text->sizetext; i++) {
+    task2(text);
+    /*for(int i = 0; i < text->sizetext; i++) {
         wprintf(L"%ls\n", text->sentences[i]->buf);
 
-    }
-
-
-
+    }*/
     return 0;
 }
