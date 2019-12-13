@@ -3,6 +3,7 @@
 #include <locale.h>
 #include <wctype.h>
 
+
 #define SENT_SIZE 10
 #define TEXT_SIZE 10
 
@@ -216,13 +217,12 @@ int PrintWithSecondWord(Sentence* sent, wchar_t* word){
         return 1;
     while (pwc != NULL) { // пока есть слово выводим
         size_t dist = pwc - sent->buf;
-        if (sent->buf[dist + n] == L' ' || sent->buf[dist + n] == L',' || sent->buf[dist + n] == L'.'){ // проверка что это слово а не просто вхлждение
+        if ((sent->buf[dist + n] == L' ' || sent->buf[dist + n] == L',' || sent->buf[dist + n] == L'.') && (sent->buf[dist - 1 ] == L' ' || dist == 0)){ // проверка что это слово а не просто вхлждение
             for(int i = 0; i < dist; i++){  // выводим символы до слова
-                wprintf(L"%lc", sent->buf[i]);
+                wprintf(L"\033[0;30m" L"%lc", sent->buf[i]);
             }
-            for(int j = dist; j < n; j++){ // выводим слово
-                //wprintf(L"%lc", sent->buf[j]);
-                wprintf(L"BIG");
+            for(int j = dist; j < dist + n; j++){ // выводим слово
+                wprintf(L"\033[0;32m" L"%lc", sent->buf[j]);
             }
             end = dist + n;
             pwc = wcsstr(pwc + 1, word); // проверяем есть ли ещё
@@ -231,9 +231,9 @@ int PrintWithSecondWord(Sentence* sent, wchar_t* word){
         }
     if(end < len){ // выводим то что после слова если оно не стоит в конце предложения
         for(int k = end; k < len; k++){
-            wprintf(L"%lc", sent->buf[k]);
+            wprintf(L"\033[0;30m" L"%lc", sent->buf[k]);
         }
-    wprintf(L"\n");
+    wprintf(L"\033[0;30m" L"\n");
     }
     return 0;
 }
@@ -247,25 +247,67 @@ int task2(Text* text){
         if(PrintWithSecondWord(text->sentences[i], word) == 1)
             continue;
     }
+    free(word);
     return 0;
+}
+
+void Free(Text* text){
+    for(int i = 0; i < text->sizetext; i++){
+        free(text->sentences[i]->buf);
+        free(text->sentences[i]);
+    }
+    free(text->sentences);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 int main(){
     setlocale( LC_ALL, "ru_RU.UTF-8");
+    int choice = 0;
     wprintf(L"Введите текст. Текст должен заканчиваться символом переноса строки\n");
     Text* text = (Text*)malloc(sizeof(Text));
     maketext(text);
     readtext(text);
-    //printmenu();
-    //wprintf(L"Введите число: ");
-    //task4(text);
-    //task3(text); //работает
-    //task1(text);
-    task2(text);
-    /*for(int i = 0; i < text->sizetext; i++) {
-        wprintf(L"%ls\n", text->sentences[i]->buf);
+    while(choice != 6){
+        printmenu();
+        wprintf(L"Номер: ");
+        wscanf(L"%d", &choice);
+        switch (choice){
+            case 1:
+                if(task1(text) == 0){
+                    wprintf(L"\nЗаменено\n");
+                } else
+                    wprintf(L"\nError");
+                break;
+            case 2:
+                    (task2(text));
+                    break;
 
-    }*/
+            case 3:
+                if(task3(text) == 0){
+                    wprintf(L"\nОтсортировано\n");
+                } else
+                    wprintf(L"\nError");
+                break;
+            case 4:
+                if(task4(text) == 0){
+                    wprintf(L"\nУдалено\n");
+                } else
+                    wprintf(L"\nError");
+                break;
+            case 5:
+                for(int i = 0; i < text->sizetext; i++) {
+                    wprintf(L"%ls\n", text->sentences[i]->buf);
+                }
+                break;
+            case 6:
+                Free(text);
+                free(text);
+                wprintf(L"Программа завершена\nДо свидания!");
+                return 0;
+            default:
+                wprintf(L"\nError");
+                return 0;
+        }
+    }
     return 0;
 }
