@@ -186,7 +186,7 @@ wchar_t* FindSecondWord(Sentence *sent) {
     while (sent->buf[i] != L' ' && sent->buf[i] != L',' && sent->buf[i] != L'.' && i < sent->lensent) {
         i++;
     }
-    if (i >= sent->lensent)
+    if (sent->buf[i] == L'.')
         return NULL;
     int j = i+1;
     int n = 0;
@@ -213,6 +213,8 @@ int PrintWithSecondWord(Sentence* sent, wchar_t* word) {
     wchar_t *pwc;
     size_t end = 0;
     pwc = wcsstr(sent->buf, word); // поиск первого вхождения слова
+    if(pwc == NULL)
+        return 0;
     while (pwc != NULL) { // пока есть слово выводим
         size_t dist = pwc - sent->buf;
         if ((sent->buf[dist + n] == L' ' || sent->buf[dist + n] == L',' || sent->buf[dist + n] == L'.') &&
@@ -227,10 +229,8 @@ int PrintWithSecondWord(Sentence* sent, wchar_t* word) {
             pwc = wcsstr(pwc + 1, word); // проверяем есть ли ещё
         } else
             pwc = wcsstr(pwc + 1, word);
-
     }
-
-    if(end < len){ // выводим то что после слова если оно не стоит в конце предложения
+    if((end < len) && (end != 0)){ // выводим то что после слова если оно не стоит в конце предложения
         for(int k = end; k < len; k++) {
             wprintf(L"\033[0;30m" L"%lc", sent->buf[k]);
         }
@@ -242,8 +242,9 @@ int PrintWithSecondWord(Sentence* sent, wchar_t* word) {
 int task2(Text* text){
     wchar_t * word;
     word = FindSecondWord(text->sentences[0]);
-    if(word == NULL)
+    if(word == NULL){
         return 1;
+    }
     for(int i = 0; i<text->sizetext; i++) {
         PrintWithSecondWord(text->sentences[i], word);
     }
@@ -259,7 +260,7 @@ void Free(Text* text){
     free(text->sentences);
 }
 
-////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////    wprintf(L"test1");/////////////////////////////////////////
 int main(){
     setlocale( LC_ALL, "ru_RU.UTF-8");
     int choice = 0;
@@ -279,7 +280,9 @@ int main(){
                     wprintf(L"\nError");
                 break;
             case 2:
-                task2(text);
+                if(task2(text) == 1){
+                    wprintf(L"Второе слово не найденно, функция не может быть выполнена!\n");
+                }
                 break;
 
             case 3:
