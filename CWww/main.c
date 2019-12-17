@@ -69,6 +69,8 @@ int main(){
                 wprintf(L"Программа завершена\nДо свидания!");
                 return 0;
             default:
+		Free(text);
+                free(text);
                 wprintf(L"\nError");
                 return 0;
         }
