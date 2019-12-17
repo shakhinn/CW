@@ -53,8 +53,8 @@ int PrintWithSecondWord(Sentence* sent, wchar_t* word){
         for(int k = end; k < len; k++) {
             wprintf(L"%lc", sent->buf[k]);
         }
+	wprintf(L"\n");
     }
-    wprintf(L"\n");
     return 0;
 }
 
