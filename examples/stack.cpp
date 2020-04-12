@@ -50,18 +50,11 @@ public:
 };
 
 
-Stack stackCreator(){
 
-	Stack s(10);
-	return s;
-
-}
 
 int main(){
 	Stack s(10);
-	//s.	
 	s.top();
-//	s = stackCreator();
 	printf("\n");
 	s.push(10);
 	cout<<s.top()<<endl;
