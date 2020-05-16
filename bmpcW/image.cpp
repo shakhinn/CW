@@ -166,7 +166,7 @@ void Image::draw_triangle(int x1, int y1, int x2, int y2, int x3, int y3, int th
 }
 int Image::draw_flood_triangle(int x1, int y1, int x2, int y2, int x3, int y3, int thik, QColor floodcolor, QColor edgecolor){
     long long int square = 0.5*abs((x2-x1)*(y3-y1)-(x3-x1)*(y2-y1));
-    if(square > 150000)
+    if(square > 120000)
         return 1;
     Image::drawLine_thick(x1, y1, x2, y2, 1, floodcolor);
     Image::drawLine_thick(x2, y2, x3, y3, 1, floodcolor);
