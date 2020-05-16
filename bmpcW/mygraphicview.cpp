@@ -3,12 +3,8 @@
 MyGraphicView::MyGraphicView(QWidget* parent):QGraphicsView (parent)
 {
     this->setAlignment(Qt::AlignLeft | Qt::AlignTop);
-      group = new QGraphicsItemGroup();
-
 }
-MyGraphicView::~MyGraphicView() {
 
-}
 
 void MyGraphicView::update(QPixmap pixmap){
     scene = new QGraphicsScene();

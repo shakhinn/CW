@@ -25,19 +25,6 @@
     </property>
     <layout class="QGridLayout" name="gridLayout"/>
    </widget>
-   <widget class="QPushButton" name="test">
-    <property name="geometry">
-     <rect>
-      <x>1100</x>
-      <y>750</y>
-      <width>101</width>
-      <height>29</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>PushButton</string>
-    </property>
-   </widget>
    <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>

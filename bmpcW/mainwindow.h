@@ -47,8 +47,6 @@ private slots:
 
     void on_cut_clicked();
 
-    void on_test_clicked();
-
     void on_info_triggered();
 
     void on_instruction_triggered();
