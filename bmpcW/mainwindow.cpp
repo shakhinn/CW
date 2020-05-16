@@ -190,13 +190,7 @@ void MainWindow::on_cut_clicked()
     button_pressed = CUT;
 }
 
-void MainWindow::on_test_clicked()
-{
-    img->resize();
-    inform->info.height = img->bmif.height;
-    inform->info.width = img->bmif.width;
-    picture->update(img->getPixmap());
-}
+
 
 void MainWindow::on_info_triggered()
 {

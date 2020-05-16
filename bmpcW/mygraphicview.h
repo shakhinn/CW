@@ -32,9 +32,7 @@ public:
     coorditate clicked;
     void update(QPixmap pixmap);
     explicit MyGraphicView(QWidget* parent = nullptr);
-    ~MyGraphicView();
 private:
-    QGraphicsItemGroup* group;
     QPixmap pixmap;
     QGraphicsScene* scene;
 

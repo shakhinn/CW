@@ -64,7 +64,6 @@ int Image::saveImage(const char *path){
 QPixmap Image::getPixmap(){
     QImage *image = new QImage(bmif.width, bmif.height, QImage::Format_RGB16);
     QColor pixel;
-    //for(int i = bmif.height-1; i>=0; i--){
     for(int i = 0; i < (int)bmif.height; i++){
         for(int j = 0; j < (int)bmif.width; j++){
             pixel.setRed(arr[i][j].r);
@@ -97,14 +96,14 @@ void Image::drawLine(int x1, int y1, int x2, int y2, QColor color) {
     //
     int error = deltaX - deltaY;
     //
-    arr[x2][y2].b = static_cast<unsigned char>(color.blue());
-    arr[x2][y2].g = static_cast<unsigned char>(color.green());
-    arr[x2][y2].r = static_cast<unsigned char>(color.red());
+    arr[x2][y2].b = color.blue();
+    arr[x2][y2].g = color.green();
+    arr[x2][y2].r = color.red();
     while(x1 != x2 || y1 != y2)
    {
-        arr[x1][y1].b = static_cast<unsigned char>(color.blue());
-        arr[x1][y1].g = static_cast<unsigned char>(color.green());
-        arr[x1][y1].r = static_cast<unsigned char>(color.red());
+        arr[x1][y1].b = color.blue();
+        arr[x1][y1].g = color.green();
+        arr[x1][y1].r = color.red();
         const int error2 = error * 2;
         //
         if(error2 > -deltaY)
@@ -147,8 +146,8 @@ void Image::flood(int x, int y, QColor color){
     arr[x][y].b = color.blue();
     arr[x][y].g = color.green();
     Image::flood(x+1,y,color);
-    Image::flood(x-1,y,color);
     Image::flood(x,y+1,color);
+    Image::flood(x-1,y,color);    
     Image::flood(x,y-1,color);
     return;
 
@@ -157,7 +156,6 @@ void Image::flood(int x, int y, QColor color){
 void Image::middle(int x1, int y1, int x2, int y2, int x3, int y3){
     center.x = ((x1 + x2 - 2*x3)*((y3 - y1)*(x2 + x3 - 2*x1) + x1*(y2 + y3 - 2*y1)) - x3*(x2 + x3 - 2*x1)*(y1 + y2 - 2*y3))/((y2 + y3 - 2*y1)*(x1 + x2 - 2*x3) - (x2 + x3 - 2*x1)*(y1 + y2 - 2*y3));
     center.y = ((center.x - x1)*(y2 + y3 - 2*y1)/(x2 + x3 - 2*x1)) + y1;
-
 }
 
 void Image::draw_triangle(int x1, int y1, int x2, int y2, int x3, int y3, int thik, QColor color){
@@ -168,24 +166,24 @@ void Image::draw_triangle(int x1, int y1, int x2, int y2, int x3, int y3, int th
 }
 int Image::draw_flood_triangle(int x1, int y1, int x2, int y2, int x3, int y3, int thik, QColor floodcolor, QColor edgecolor){
     long long int square = 0.5*abs((x2-x1)*(y3-y1)-(x3-x1)*(y2-y1));
-    if(square > 200000)
+    if(square > 150000)
         return 1;
     Image::drawLine_thick(x1, y1, x2, y2, 1, floodcolor);
     Image::drawLine_thick(x2, y2, x3, y3, 1, floodcolor);
     Image::drawLine_thick(x1, y1, x3, y3, 1, floodcolor);
 
-    if(square > 150000){
+    if(square > 100000){
         int Xm = (x1+x2)/2;
         int Ym = (y1+y2)/2;
         drawLine_thick(x3, y3, Xm, Ym, 1, floodcolor);
         long long int sq1 = 0.5*abs((Xm-x1)*(y3-y1)-(x3-x1)*(Ym-y1));
-        if(sq1 > 150000){
+        if(sq1 > 100000){
             return 1;
         }
         Image::middle(x1,y1,Xm,Ym,x3,y3);
         Image::flood(center.x, center.y, floodcolor);
         long long int sq2 = 0.5*abs((Xm-x2)*(y3-y2)-(x3-x2)*(Ym-y2));
-        if(sq2 > 150000){
+        if(sq2 > 100000){
             return 1;
         }
         Image::middle(x2,y2,Xm,Ym,x3,y3);
@@ -227,22 +225,3 @@ void Image::cut(int x1, int y1, int x2, int y2){
     bmif.width = newwidth;
 }
 
-void Image::resize(){
-    int Ysize = bmif.height/2;
-    int Xsize = bmif.width/2;
-    double hRatio = (double)Ysize/bmif.height;
-    double wRatio = (double)Xsize/bmif.width;
-    Rgb** small = new Rgb*[Ysize];
-    for(int y = 0; y < Ysize; y++){
-        small[y] = new Rgb[Xsize];
-        for(int x = 0; x < Xsize; x++)
-            small[y][x] = arr[(int)(y/hRatio)][(int)(x/wRatio)];
-    }
-    for(int i = 0; i < (int)bmif.height; i++){
-        delete [] arr[i];
-    }
-    delete [] arr;
-    arr = small;
-    bmif.height = Ysize;
-    bmif.width = Xsize;
-}
