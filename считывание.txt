@@ -1,0 +1,431 @@
+#include <stdlib.h>
+#include <wchar.h>
+#include <locale.h>
+#include <wctype.h>
+
+
+#define SENT_SIZE 10
+#define TEXT_SIZE 10
+
+
+typedef struct Sentence{
+    wchar_t * buf;
+    int maxsizes;
+    int lensent;
+    int cntwords;
+    int cntchange;
+}Sentence;
+
+typedef struct Text{
+    Sentence** sentences;
+    int sizetext;
+    int maxsizet;
+}Text;
+
+void makesent(Sentence* sent){
+    sent->maxsizes = SENT_SIZE;
+    sent->buf = (wchar_t*)malloc(sent->maxsizes * sizeof(wchar_t));
+    sent->lensent = 0;
+    sent->cntwords = 0;
+    sent->cntchange = 0;
+}
+
+void maketext(Text* text){
+    text->maxsizet = TEXT_SIZE;
+    text->sentences = (Sentence**)calloc(text->maxsizet, sizeof(Sentence*));
+    text->sizetext = 0;
+}
+
+void readsent(Sentence* sent){
+    wchar_t wc;
+    int flag = 0;
+    do {
+        wc = getwchar();
+        while (wcschr(L" \t", wc) && !flag) {
+            wc = getwchar();
+        }
+        flag = 1;
+        if (sent->lensent + 1 > sent->maxsizes) {
+            sent->maxsizes *= 2;
+            sent->buf = (wchar_t *)realloc(sent->buf, sent->maxsizes * sizeof(wchar_t));
+        }
+        sent->buf[sent->lensent++] = wc;
+    }while (!wcschr(L".\n", wc));
+    sent->buf[sent->lensent++] = L'\0';
+}
+
+void readtext(Text* text){
+    while(1){
+        Sentence* sentence = (Sentence*)malloc(sizeof(Sentence));
+        makesent(sentence);
+        readsent(sentence);
+        if(sentence->buf[0] == L'\n'){
+            free(sentence->buf);
+            free(sentence);
+            break;
+        }
+        else{
+            
+                text->sentences[text->sizetext] = sentence;
+                text->sizetext++;
+                if (text->sizetext == text->maxsizet - 2) {
+                    text->maxsizet *= 2;
+                    text->sentences = (Sentence **) realloc(text->sentences, text->maxsizet * sizeof(Sentence *));
+                }
+            
+        }
+    }
+}
+
+void Free(Text* text){
+    for(int i = 0; i < text->sizetext; i++){
+        free(text->sentences[i]->buf);
+        free(text->sentences[i]);
+    }
+    free(text->sentences);
+}
+
+int cmp(const void* a, const void* b){
+    Sentence* aa = *((Sentence**)a);
+    Sentence* bb = *((Sentence**)b);
+    return aa->lensent - bb->lensent;
+}
+
+int main(){
+    int choice = 0;
+    Text* text = (Text*)malloc(sizeof(Text));
+    maketext(text);
+    readtext(text);
+    qsort(text->sentences, text->sizetext, sizeof(Sentence*), cmp);
+    for(int i = 0; i < text->sizetext; i++){
+        wprintf(L"%ls ", text->sentences[i]->buf);
+    }
+    Free(text);
+    free(text);
+}
+
+..........
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+typedef struct Book {
+    char name[30];
+    char author[30];
+    unsigned int pages;
+    char isbn[20];
+}Book;
+
+int  cmp(const void* a, const void* b){
+    Book aa = *(Book*)a;
+    Book bb = *(Book*)b;
+    if(strcmp(aa.author, bb.author)>0)
+        return -1;
+    if(!strcmp(aa.author, bb.author))
+        return 0;
+    if(strcmp(aa.author, bb.author)<0)
+        return 1;
+}
+
+int main(){
+    int size = 0;
+    scanf("%d", &size);
+    Book arr[size];
+    for(int i  = 0; i < size; i++){
+        scanf("%s %s %d %s\n", arr[i].name, arr[i].author, &(arr[i].pages), arr[i].isbn);
+    }
+    qsort(arr, size, sizeof(Book), cmp);
+    for(int i = 0; i < size; i++) {
+        printf("%s %s %d %s ", arr[i].name, arr[i].author, arr[i].pages, arr[i].isbn);
+    }
+    return 0;
+}
+
+....................
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+typedef struct Country {
+    char name[30];
+    unsigned int population;
+    char capital[30];
+}Country;
+
+int  cmp(const void* a, const void* b){
+    Country aa = *(Country*)a;
+    Country bb = *(Country*)b;
+    if(strcmp(aa.name, bb.name)>0)
+        return 1;
+    if(!strcmp(aa.name, bb.name))
+        return 0;
+    if(strcmp(aa.name, bb.name)<0)
+        return -1;
+}
+
+int cmp1(const void* a, const void* b){
+    Country aa = *(Country*)a;
+    Country bb = *(Country*)b;
+    if(aa.population > bb.population)
+        return 1;
+    if(aa.population < bb.population)
+        return -1;
+    return 0;
+}
+
+
+int main(){
+    int size = 0;
+    scanf("%d", &size);
+    Country arr[size];
+    for(int i  = 0; i < size; i++){
+        scanf("%s %d %s\n", arr[i].name, &(arr[i].population), arr[i].capital);
+    }
+    
+    qsort(arr, size, sizeof(Country), cmp1);
+    qsort(arr, size, sizeof(Country), cmp);
+    for(int i  = 0; i < size; i++){
+        printf("%s %d %s ", arr[i].name, arr[i].population, arr[i].capital);
+    }
+    return 0;
+}
+
+
+..................
+
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
+
+struct Node{
+    char data;
+    struct Node *next;
+};
+
+struct Stack{
+    struct Node *head;
+    int size;
+};
+
+struct Stack stackInit(){
+    struct Stack stack={NULL, 0};
+    return stack;
+}
+
+void push(struct Stack *stack, char elem){
+    struct Node *node = malloc(sizeof(struct Node));
+    node->data = elem;
+    node->next = stack->head;
+    stack->head = node;
+    stack->size++;
+}
+
+int isEmpty(struct Stack *stack){
+    return !stack->size;
+}
+
+char pop(struct Stack *stack){
+    if(!isEmpty(stack)){
+        struct Node *node = stack->head;
+        stack->head = stack->head->next;
+        char res = node->data;
+        free(node);
+        stack->size--;
+        return res;
+    }
+}
+
+int top(struct Stack *stack){
+	if(!isEmpty(stack)){
+        struct Node *node = stack->head;
+	    return node->data;
+    }
+}
+
+int count(struct Stack* stack){
+    int number = 0;
+    while(stack->head){
+        number++;
+        stack->head = stack->head->next;
+    }
+    return number;
+}
+
+int main(){
+    struct Stack stack = stackInit();
+    char* arr = malloc(500 * sizeof(char));
+    fgets(arr, 500, stdin);
+    int len = strlen(arr);
+    for(int i = 0; i < len; i++){
+        if(arr[i] == '(' || arr[i] == '{' || arr[i] == '[' || arr[i] == '<'){
+            push(&stack, arr[i]);
+            continue;
+        }
+        if(arr[i] == ')' || arr[i] == ']' || arr[i] == '}' || arr[i] == '>'){
+            if(isEmpty(&stack)){
+                printf("wrong");
+                return 0;
+            }
+            char prev = top(&stack);
+            if((prev == '(' && arr[i] == ')')||(prev == '[' && arr[i] == ']')||(prev == '{' && arr[i] == '}')||(prev == '<' && arr[i] == '>')){
+                pop(&stack);
+            }
+            else{
+                printf("wrong\n");
+                return 0;
+            }
+        }
+
+
+    }
+    if(isEmpty(&stack)){
+        printf("correct");
+        return 0;
+    }
+    printf("wrong");
+    return 0;
+}
+
+.............
+
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+
+typedef char type;
+#define ST_SIZE 500
+
+typedef struct Stack{
+    type arr[ST_SIZE];
+    int sp;
+} Stack;
+
+Stack createStack(){
+    Stack stack = {{0},-1};
+    return stack;
+}
+
+void push(Stack *stack, type val){
+    stack->arr[++(stack->sp)] = val;
+}
+
+type pop(Stack *stack){
+    return stack->arr[(stack->sp)--];
+}
+
+type top(Stack *stack){
+    return stack->arr[(stack->sp)];
+}
+
+int isEmpty(Stack *stack){
+    return stack->sp == -1;
+}
+
+int main(){
+    struct Stack stack = createStack();;
+    char* arr = malloc(500 * sizeof(char));
+    fgets(arr, 500, stdin);
+    int len = strlen(arr);
+    for(int i = 0; i < len; i++){
+        if(arr[i] == '(' || arr[i] == '{' || arr[i] == '[' || arr[i] == '<'){
+            push(&stack, arr[i]);
+        }
+        if(arr[i] == ')' || arr[i] == ']' || arr[i] == '}' || arr[i] == '>'){
+            if(isEmpty(&stack)){
+                printf("wrong");
+                return 0;
+            }
+            char prev = top(&stack);
+            if(prev == 0){
+                printf("wrong\n");
+                return 0;
+            }
+            if((prev == '(' && arr[i] == ')')||(prev == '[' && arr[i] == ']')||(prev == '{' && arr[i] == '}')||(prev == '<' && arr[i] == '>')){
+                pop(&stack);
+            }
+            else{
+                printf("wrong\n");
+                return 0;
+            }
+        }
+
+
+    }
+    if(isEmpty(&stack)){
+        printf("correct");
+        return 0;
+    }
+    printf("wrong");
+    return 0;
+}
+
+...........
+
+#include <stdio.h>
+#include <stdlib.h>
+
+int solvemaze(int** solution, int r, int c, int n,int m, int** maze)
+{
+    if((r==n-1) && (c==m-1))
+    {
+        solution[r][c] = 1;
+        return 1;
+    }
+    if(r>=0 && c>=0 && r<n && c<m && solution[r][c] == 0 && maze[r][c] == 0)
+    {
+        //if safe to visit then visit the cell
+        solution[r][c] = 1;
+        //going down
+        if(solvemaze(solution,r+1, c,n,m,maze))
+            return 1;
+        //going right
+        if(solvemaze(solution,r, c+1,n,m,maze))
+            return 1;
+        //going up
+        if(solvemaze(solution,r-1, c,n,m,maze))
+            return 1;
+        //going left
+        if(solvemaze(solution,r, c-1,n,m,maze))
+            return 1;
+        //backtracking
+        solution[r][c] = 0;
+        return 0;
+    }
+    return 0;
+
+}
+
+int main()
+{
+    int n, m;
+    scanf("%d%d", &n, &m);
+    int** maze = calloc(n, sizeof(int*));
+    for (int i = 0; i < n; i++)
+    {
+        maze[i] = calloc(m, sizeof(int));
+        for (int j = 0; j < m; j++)
+        {
+            scanf("%d", &maze[i][j]);
+        }
+    }
+
+    int** solution = calloc(n, sizeof(int*));
+    for (int i = 0; i < n; i++)
+        solution[i] = calloc(m, sizeof(int));
+
+    int i,j;
+    for(i=0; i<n; i++)
+    {
+        for(j=0; j<m; j++)
+        {
+            solution[i][j] = 0;
+        }
+    }
+    if (solvemaze(solution, 0, 0,n,m,maze ))
+        printf("exists");
+    else
+        printf("doesn't exist\n");
+    return 0;
+}
