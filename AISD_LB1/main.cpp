@@ -3,12 +3,12 @@
 #include "inputoutput.h"
 
 int main(int argc, char** argv) {
-    string expression = Cuinput(argc, argv);
+    string expression = cuinput(argc, argv);
     if(expression == "HELP"){
         return 0;
     }
     cout<<"Вы ввели: "<< expression<<endl;
-    bool result = CheckString(expression);
+    bool result = checkString(expression);
     if(result){
         cout<<"\033[1;32mSUCCESS\033[0m\n";
     } else{
