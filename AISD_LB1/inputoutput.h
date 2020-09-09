@@ -4,13 +4,13 @@
 #define START 1
 #define END 0
 
-string Cuinput(int argc, char** argv);
+string cuinput(int argc, char** argv);
 
-void ProceedOutput(string output, int indent);
+void proceedOutput(string output, int indent);
 
-void ProceedErr(const string& err, int& pos);
+void proceedErr(const string& err, int& pos);
 
-void Info(int indent, int flag);
+void info(int indent, int flag);
 
 
 

@@ -1,6 +1,6 @@
 #include "inputoutput.h"
 
-string Cuinput(int argc, char** argv){
+string cuinput(int argc, char** argv){
     if(argc == 1) {
         cout<<"Введите выражение: ";
         string res;
@@ -25,21 +25,21 @@ string Cuinput(int argc, char** argv){
     }
 }
 
-void ProceedOutput(string output, int indent){
+void proceedOutput(string output, int indent){
     for(int i = 0; i < indent; i++){
         cout<<"  ";
     }
     cout<<output<<endl;
 }
 
-void ProceedErr(const string& err, int& pos){
+void proceedErr(const string& err, int& pos){
     if(pos!= -1){
         pos = -1;
         cout<<">"<<err<<endl;
     }
 }
 
-void Info(int indent, int flag){
+void info(int indent, int flag){
     for(int i = 0; i < indent; i++){
         cout<<"  ";
     }
