@@ -39,7 +39,7 @@ bool operation (string& str, int& pos, int indent){
     return false;
 }
 
-
+// OPERAND | OPERAND,OPERANDS
 bool operands(std::string& str, int& pos, int indent) {
     if (statement(str, pos, indent + 1)) {
         if (findWord(str, pos, indent, COMMA )) {
@@ -52,14 +52,17 @@ bool operands(std::string& str, int& pos, int indent) {
 
 bool statement (string& str, int& pos, int indent){
     info(indent, START);
+    //поиск TRUE
     if (findWord(str, pos, indent, TRUE_S )) {
         info(indent, END);
         return true;
     }
+    // поиск FALSE
     else if (findWord(str, pos, indent, FALSE_S )) {
         info(indent, END);
         return true;
     }
+    //происк буквы
     else if (checkLetter(str, pos, indent)) {
         info(indent, END);
         return true;
@@ -96,7 +99,7 @@ bool checkString(string& str){
         if (copy.empty()) {
             return true;
         }
-        else proceedErr("End of string expected. \"" + copy + "\" left", position);
+        else proceedErr("End of string expected. \"" + copy, position);
     }
     // Вывод ошибки
     cout << "> " << str << endl << "> ";
