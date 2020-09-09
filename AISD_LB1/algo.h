@@ -13,18 +13,18 @@
 #define CLOSE_BRACKET ")"
 #define COMMA ","
 
-bool Statement (string& str, int& pos, int indent);
+bool statement (string& str, int& pos, int indent);
 
-bool Operands(string& str, int& pos, int indent);
+bool operands(string& str, int& pos, int indent);
 
-bool Operation (string& str, int& pos, int indent);
+bool operation (string& str, int& pos, int indent);
 
-bool FindWord (string& str, int& pos, int indent, const char* word);
+bool findWord (string& str, int& pos, int indent, const char* word);
 
-bool CheckLetter(string& str, int& pos, int indent);
+bool checkLetter(string& str, int& pos, int indent);
 
-bool CheckString(string& str);
+bool checkString(string& str);
 
-void Skip (string& str, int& pos, int indent, int n = 1);
+void skip (string& str, int& pos, int indent, int n = 1);
 #endif
 
