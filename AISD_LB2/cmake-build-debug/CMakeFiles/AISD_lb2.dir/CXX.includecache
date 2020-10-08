@@ -1,0 +1,34 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/shakhinn/CLionProjects/AISD_lb2/InOut.h
+structs.h
+/home/shakhinn/CLionProjects/AISD_lb2/structs.h
+
+/home/shakhinn/CLionProjects/AISD_lb2/lisp.h
+InOut.h
+/home/shakhinn/CLionProjects/AISD_lb2/InOut.h
+
+/home/shakhinn/CLionProjects/AISD_lb2/main.cpp
+iostream
+-
+lisp.h
+/home/shakhinn/CLionProjects/AISD_lb2/lisp.h
+
+/home/shakhinn/CLionProjects/AISD_lb2/structs.h
+iostream
+-
+string
+-
+cstring
+-
+unistd.h
+-
+fstream
+-
+

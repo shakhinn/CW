@@ -1,0 +1,1 @@
+/usr/bin/c++  -g   CMakeFiles/AISD_lb2.dir/main.cpp.o CMakeFiles/AISD_lb2.dir/lisp.cpp.o CMakeFiles/AISD_lb2.dir/InOut.cpp.o  -o AISD_lb2 
