@@ -1,0 +1,5 @@
+(+ 7 -8 9 10 sqrt(15) (- 4 5 6 -7) (- -1))
+SUCCESS
+SUCCESS
+SUCCESS
+SUCCESS

@@ -1,0 +1,3 @@
+/home/shakhinn/CLionProjects/AISD_lb2/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/shakhinn/CLionProjects/AISD_lb2/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/shakhinn/CLionProjects/AISD_lb2/cmake-build-debug/CMakeFiles/AISD_lb2.dir

@@ -1,0 +1,5 @@
+(+ (- -7) 8 9 (* log(2,6)))
+ERROR
+SUCCESS
+SUCCESS
+SUCCESS
