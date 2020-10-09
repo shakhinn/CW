@@ -1,0 +1,7 @@
+(+ (- (* log(sqrt(8,5),3))))
+
+ERROR
+ERROR
+ERROR
+ERROR
+ERROR
