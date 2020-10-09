@@ -1,0 +1,34 @@
+#!/bin/bash
+echo "test 1"
+./test.exe -f tests/test.txt
+echo "test 2"
+./test.exe -f tests/test1.txt
+echo "test 3"
+./test.exe -f tests/test2.txt
+echo "test 4"
+./test.exe -f tests/test3.txt
+echo "test 5"
+./test.exe -f tests/test4.txt
+echo "test 6"
+./test.exe -f tests/test5.txt
+echo "test 7"
+./test.exe -f tests/test6.txt
+echo "test 8"
+./test.exe -f tests/test7.txt
+echo "test 9"
+./test.exe -f tests/test8.txt
+echo "test 10"
+./test.exe -f tests/test9.txt
+echo "test 11"
+./test.exe -f tests/test10.txt
+echo "test 12"
+./test.exe -f tests/test11.txt
+echo "test 13"
+./test.exe -f tests/test12.txt
+echo "test 14"
+./test.exe -f tests/test13.txt
+echo "test 15"
+./test.exe -f tests/test14.txt
+echo "test 16"
+./test.exe -f tests/test15.txt
+

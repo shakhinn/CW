@@ -1,0 +1,7 @@
+sqrt(log(-3,2))
+ERROR
+ERROR
+ERROR
+ERROR
+ERROR
+ERROR
