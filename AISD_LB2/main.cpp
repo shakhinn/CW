@@ -4,7 +4,7 @@
 int main (int argc, char** argv){
     string input = cuinput(argc, argv);
     if(input.empty()){
-        cout<<"\033[1;31mERROR\033[0m\n";
+        cout<<"ERROR";
         return 0;
     }
     string copy = string(input);
@@ -22,10 +22,10 @@ int main (int argc, char** argv){
         for (int i = 0; i < errorPos; i++) {
             cout << '.';
         }
-        cout << "^" << endl << "\033[1;31mERROR\033[0m\n";
+        cout << "^" << endl << "ERROR\n";
     }
     else {
-        cout << "\033[1;32mSUCCESS\033[0m\n";
+        cout << "SUCCESS\n";
     }
     if(argc > 1){
         if(errorFlag) {

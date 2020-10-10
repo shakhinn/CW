@@ -5,7 +5,7 @@ int errorPos;
 
 string cuinput(int argc, char** argv){
     if(argc == 1) {
-        cout<<"Введите выражение: ";
+        cout<<"Write a statement: ";
         string res;
         getline(cin, res);
         return res;
@@ -13,7 +13,7 @@ string cuinput(int argc, char** argv){
     int option = 0;
     while ((option = getopt(argc,argv,"hf:"))!=-1){
         switch (option) {
-            case 'h': cout<<"Для того чтобы прочитать выражение из файла используйте флаг -f <название файла>.\n"; return "HELP";
+            case 'h': cout<<"If you want read from file use flaf -f<filename>\n"; return "HELP";
             case 'f': cout<<"read from file - "<<optarg<<endl;
                 ifstream infile(optarg);
                 if (!infile) {
@@ -50,16 +50,16 @@ void info(int indent, int flag){
         cout<<"  ";
     }
     if(flag == 1){
-        cout <<"\033[1;34mSTART FUNCTION SCAN_EXPRESSION\033[0m\n";
+        cout <<"START FUNCTION SCAN_EXPRESSION\n";
     } else if(flag == 2){
-        cout <<"\033[1;34mEND FUNCTION SCAN_EXPRESSION\033[0m\n";
+        cout <<"END FUNCTION SCAN_EXPRESSION\n";
     }else if(flag == 3){
-        cout <<"\033[1;35mSTART FUNCTION SCAN_NODE\033[0m\n";
+        cout <<"START FUNCTION SCAN_NODE\n";
     }else if(flag == 4){
-        cout <<"\033[1;35mEND FUNCTION SCAN_NODE\033[0m\n";
+        cout <<"END FUNCTION SCAN_NODE\n";
     }else if(flag == 5){
-        cout <<"\033[1;36mSTART FUNCTION SCAN_TAIL\033[0m\n";
+        cout <<"START FUNCTION SCAN_TAIL\n";
     }else if(flag == 6){
-        cout <<"\033[1;36mEND FUNCTION SCAN_TAIL\033[0m\n";
+        cout <<"END FUNCTION SCAN_TAIL\n";
     }
 }
