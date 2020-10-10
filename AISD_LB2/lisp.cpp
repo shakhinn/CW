@@ -3,7 +3,7 @@
 void skip(string& str, int& pos, int n, int indent){
     if (str.length() >= n) {
 
-        //proceedOutput(str.substr(0, n), indent);
+        proceedOutput(str.substr(0, n), indent);
 
         str = str.substr(n);
         pos++;
@@ -12,7 +12,7 @@ void skip(string& str, int& pos, int n, int indent){
 
 Expression* scanExpression(string& input, int& pos, int indent){
 
-    //info(indent, 1);
+    info(indent, 1);
 
     if(input.empty()) return nullptr;
     bool isFunc = input[0] != '(';
@@ -75,21 +75,21 @@ Expression* scanExpression(string& input, int& pos, int indent){
         skip(input, pos, 1, indent);// удаляем )
     }
 
-    //info(indent, 2);
+    info(indent, 2);
 
     return expression;
 }
 
 two_ptr* scanTail(string& input, int& pos, bool isFunc, int indent){
 
-    //info(indent, 5);
+    info(indent, 5);
 
     two_ptr* list = new two_ptr;
     list->hd = scanNode(input, pos, indent+1);
     if(list->hd == nullptr){ // если не записалась голова списка, то отчищаем память и позвращаем nullprt
         delete list;
 
-        //info(indent, 6);
+        info(indent, 6);
 
         return nullptr;
     }
@@ -101,18 +101,18 @@ two_ptr* scanTail(string& input, int& pos, bool isFunc, int indent){
         list->tl = nullptr;
     }
 
-    //info(indent, 6);
+    info(indent, 6);
 
     return list;
 }
 
 Node* scanNode(string& input, int& pos, int indent){
 
-    //info(indent, 3);
+    info(indent, 3);
 
     if (input.empty() || input[0] == ')') {
 
-        //info(indent, 4);
+        info(indent, 4);
 
         return nullptr;
     }
@@ -124,7 +124,7 @@ Node* scanNode(string& input, int& pos, int indent){
         node->data.expression = scanExpression(input, pos, indent+1);
     }
 
-    //info(indent, 4);
+    info(indent, 4);
 
     return  node;
 }
