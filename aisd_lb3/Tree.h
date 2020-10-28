@@ -9,7 +9,7 @@
 class BinaryTree{
 public:
     BinaryTree(string& str, int& pos);
-    bool checkBST();
+    bool checkBST(); 
     bool checkPiramid();
     ~BinaryTree();
 
@@ -20,10 +20,10 @@ private:
     Node* scanTree(string& str, int& pos);
     void destroy(Node*& buf);
 
-    bool checkBst_left(Node* node, int min = MIN , int max = MAX);
-    bool checkBst_right(Node* node, int min = MIN, int max = MAX);
+    bool checkBst_left(Node* node, int min = MIN , int max = MAX, int indent = 0);
+    bool checkBst_right(Node* node, int min = MIN, int max = MAX, int indent = 0);
 
-    bool checkPirapid_leaf(Node* node, int max);
+    bool checkPiramid_leaf(Node* node, int max, int indent);
 
 };
 

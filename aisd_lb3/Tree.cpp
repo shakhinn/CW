@@ -72,38 +72,65 @@ void BinaryTree::destroy(Node*& buf){
 
 bool BinaryTree::checkBST(){
     if(tree != nullptr){
-        if(checkBst_left(tree->getLeft(), MIN, tree->getData()) && checkBst_right(tree->getRight(), tree->getData(), MAX))
+        cout<<"check Binary Search Tree\n";
+        cout<<"Root: "<< tree->getData()<<endl;
+        int indent = 0;
+        if(checkBst_left(tree->getLeft(), MIN, tree->getData(), indent) && checkBst_right(tree->getRight(), tree->getData(), MAX, indent))
             return true;
         else return false;
     }
     return false;
 }
 
-bool BinaryTree::checkBst_left(Node* node, int min, int max){
+bool BinaryTree::checkBst_left(Node* node, int min, int max, int indent){
     if(node != nullptr){
+        for(int i = 0; i < indent; i++){cout<<"  ";}
+        cout<<"go left to the "<<node->getData()<<"; ";
         if(node->getData() > min && node->getData() < max){
+            if(min == MIN){
+                cout<<node->getData()<<"<"<<max<<"  OK  "<<endl;
+            }else cout<<min<<"<"<<node->getData()<<"<"<<max<<"  OK  "<<endl;
+            if(node->getLeft()!= nullptr && node->getRight()!= nullptr) {
+                for (int i = 0; i <= indent; i++) { cout << "  "; }
+                cout << "Leaf: " << node->getData() << endl;
+            }
             int old_max = max;
             max = node->getData();
             int old_min = min;
             min = node->getData();
-            if(checkBst_left(node->getLeft(), old_min, max) && checkBst_right(node->getRight(), min, old_max)){
+            if(checkBst_left(node->getLeft(), old_min, max, indent+1) && checkBst_right(node->getRight(), min, old_max, indent+1)){
                 return true;
             } else return false;
-        } else return false;
+        } else{
+            cout<<max<<"<"<<node->getData()<<" ERROR"<<endl;
+            return false;
+        }
     }
     return true;
 }
-bool BinaryTree::checkBst_right(Node* node, int min, int max){
+bool BinaryTree::checkBst_right(Node* node, int min, int max, int indent){
     if(node != nullptr){
+        for(int i = 0; i < indent; i++){cout<<"  ";}
+        cout<<"go right to the "<<node->getData()<<"; ";
         if(node->getData() > min && node->getData() < max){
+            if(max == MAX){
+                cout<<min<<"<"<<node->getData()<<"  OK  "<<endl;
+            }else cout<<min<<"<"<<node->getData()<<"<"<<max<<"  OK  "<<endl;
+            if(node->getLeft()!= nullptr && node->getRight()!= nullptr) {
+                for (int i = 0; i <= indent; i++) { cout << "  "; }
+                cout << "Leaf: " << node->getData() << endl;
+            }
             int old_max = max;
             max = node->getData();
             int old_min = min;
             min = node->getData();
-            if(checkBst_left(node->getLeft(), old_min, max) && checkBst_right(node->getRight(), min, old_max)){
+            if(checkBst_left(node->getLeft(), old_min, max, indent+1) && checkBst_right(node->getRight(), min, old_max, indent+1)){
                 return true;
             } else return false;
-        } else return false;
+        } else{
+            cout<<node->getData()<<"<"<<min<<" ERROR"<<endl;
+            return false;
+        }
     }
     return true;
 
@@ -111,21 +138,34 @@ bool BinaryTree::checkBst_right(Node* node, int min, int max){
 
 bool BinaryTree::checkPiramid(){
     if(tree!= nullptr){
-        if(checkPirapid_leaf(tree->getLeft(), tree->getData()) && checkPirapid_leaf(tree->getRight(), tree->getData())){
+        cout<<"Check Piramid\n";
+        cout<<"Root: "<< tree->getData()<<endl;
+        int indent = 0;
+        if(checkPiramid_leaf(tree->getLeft(), tree->getData(), indent) && checkPiramid_leaf(tree->getRight(), tree->getData(), indent)){
             return true;
         } else return false;
     }
     return false;
 }
 
-bool BinaryTree::checkPirapid_leaf(Node* node, int max){
+bool BinaryTree::checkPiramid_leaf(Node* node, int max, int indent){
     if(node != nullptr){
+        for(int i = 0; i < indent; i++){cout<<"  ";}
+        cout<<"go to the "<<node->getData()<<"; ";
         if(node->getData() <= max){
+            cout<<node->getData()<<"<="<<max<<"  OK  "<<endl;
+            if(node->getLeft()!= nullptr && node->getRight()!= nullptr) {
+                for (int i = 0; i <= indent; i++) { cout << "  "; }
+                cout << "Leaf: " << node->getData() << endl;
+            }
             max = node->getData();
-            if(checkPirapid_leaf(node->getLeft(), max) && checkPirapid_leaf(node->getRight(), max)) {
+            if(checkPiramid_leaf(node->getLeft(), max, indent+1) && checkPiramid_leaf(node->getRight(), max, indent+1)) {
                 return true;
             } else return false;
-        } else return false;
+        } else {
+            cout<<node->getData()<<">="<<max<<"  ERROR  "<<endl;
+            return false;
+        }
     }
     return true;
 }

@@ -5,5 +5,4 @@
 
 string cuinput(int argc, char** argv);
 
-
 #endif //AISD_LB3_INOUT_H

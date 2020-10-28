@@ -10,9 +10,25 @@ int main (int argc, char** argv){
     string copy = string(input);
     int pos = 0;
     BinaryTree tree = BinaryTree(copy, pos);
-    if(tree.checkBST()){
-        cout<<"BST\n";
-    } else if(tree.checkPiramid()){
-        cout<<"piramid\n";
-    } else cout<<"noooo\n";
+    cout<<input<<endl;
+    if(tree.checkBST()) {
+        cout << "Tree is BST\n";
+        if (argc > 1) {
+            ofstream outfile(optarg, ios::app);
+            outfile << "Tree is BST\n";
+        }
+    }else if(tree.checkPiramid()){
+        cout<<"Tree is a piramid\n";
+        if (argc > 1) {
+            ofstream outfile(optarg, ios::app);
+            outfile << "Tree is a piramid\n";
+        }
+    }else{
+        cout<<"Tree is not BST or Piramid\n";
+        if (argc > 1) {
+            ofstream outfile(optarg, ios::app);
+            outfile << "Tree is not BST or Piramid\n";
+        }
+    }
+    return 0;
 }
