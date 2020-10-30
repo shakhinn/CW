@@ -2,12 +2,17 @@
 #include "InOut.h"
 
 
-BinaryTree::BinaryTree(string &str, int &pos) {
+BinaryTree::BinaryTree(string &str){
+    int pos = 0;
     tree = scanTree(str, pos);
 }
 
 BinaryTree::~BinaryTree() {
     destroy(this->tree);
+}
+
+bool BinaryTree::isErr() const {
+    return errorFlag;
 }
 
 void BinaryTree::skip(string& str, int& pos, int n){
@@ -32,6 +37,11 @@ Node *BinaryTree::scanTree(string& str, int& pos) {
             skip(str, pos, 1);
             return nullptr;
         }
+        if(!(isdigit(str[0]) || str[0] == '-')){
+            errorFlag = true;
+            cout<<"not integer in tree\n";
+            return nullptr;
+        }
         Node *buf = new Node();
         buf->setData(getNum(str, pos));
         if(str[0] == ')'){
@@ -47,7 +57,7 @@ Node *BinaryTree::scanTree(string& str, int& pos) {
                 if(str[0]== ')') {
                     skip(str, pos, 1);
                     return buf;
-                } else cout<<"error";
+                } else {cout<<"error\n"; errorFlag = true;}
             }else if(str[0]== ')'){
                 skip(str, pos, 1);
                 return buf;
@@ -56,7 +66,7 @@ Node *BinaryTree::scanTree(string& str, int& pos) {
         }
 
     }
-    else{ cout<<"error";}
+    else{ cout<<"error\n"; errorFlag = true;}
     return nullptr;
 }
 
@@ -71,7 +81,7 @@ void BinaryTree::destroy(Node*& buf){
 }
 
 bool BinaryTree::checkBST(){
-    if(tree != nullptr){
+    if(tree != nullptr && !errorFlag){
         cout<<"check Binary Search Tree\n";
         cout<<"Root: "<< tree->getData()<<endl;
         int indent = 0;
@@ -137,7 +147,7 @@ bool BinaryTree::checkBst_right(Node* node, int min, int max, int indent){
 }
 
 bool BinaryTree::checkPiramid(){
-    if(tree!= nullptr){
+    if(tree!= nullptr && !errorFlag){
         cout<<"Check Piramid\n";
         cout<<"Root: "<< tree->getData()<<endl;
         int indent = 0;
