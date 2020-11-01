@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="OOP"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;CMake Files\..\;CMake Files\..\..\;CMake Files\..\..\..\;CMake Files\..\..\..\..\;CMake Files\..\..\..\..\usr\;CMake Files\..\..\..\..\usr\lib\;CMake Files\..\..\..\..\usr\lib\x86_64-linux-gnu\;CMake Files\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\;CMake Files\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\SFML\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/home/shakhinn/CLionProjects/OOP/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/shakhinn/CLionProjects/OOP/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/shakhinn/CLionProjects/OOP/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/shakhinn/CLionProjects/OOP/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/shakhinn/CLionProjects/OOP/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/home/shakhinn/CLionProjects/OOP/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/shakhinn/CLionProjects/OOP/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/shakhinn/CLionProjects/OOP/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/shakhinn/CLionProjects/OOP/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/shakhinn/CLionProjects/OOP/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/home/shakhinn/CLionProjects/OOP/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/shakhinn/CLionProjects/OOP/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/shakhinn/CLionProjects/OOP/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/shakhinn/CLionProjects/OOP/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/shakhinn/CLionProjects/OOP/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="OOP">
+				<Option output="/home/shakhinn/CLionProjects/OOP/cmake-build-debug/OOP" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/shakhinn/CLionProjects/OOP/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/shakhinn/CLionProjects/OOP/cmake-build-debug/Makefile&quot;  VERBOSE=1 OOP"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/shakhinn/CLionProjects/OOP/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/shakhinn/CLionProjects/OOP/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/shakhinn/CLionProjects/OOP/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="OOP/fast">
+				<Option output="/home/shakhinn/CLionProjects/OOP/cmake-build-debug/OOP" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/shakhinn/CLionProjects/OOP/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/shakhinn/CLionProjects/OOP/cmake-build-debug/Makefile&quot;  VERBOSE=1 OOP/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/shakhinn/CLionProjects/OOP/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/shakhinn/CLionProjects/OOP/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/shakhinn/CLionProjects/OOP/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/home/shakhinn/CLionProjects/OOP/Controller/Controller.cpp">
+			<Option target="OOP"/>
+		</Unit>
+		<Unit filename="/home/shakhinn/CLionProjects/OOP/Controller/Controller.h">
+			<Option target="OOP"/>
+		</Unit>
+		<Unit filename="/home/shakhinn/CLionProjects/OOP/Model/Cell.cpp">
+			<Option target="OOP"/>
+		</Unit>
+		<Unit filename="/home/shakhinn/CLionProjects/OOP/Model/Cell.h">
+			<Option target="OOP"/>
+		</Unit>
+		<Unit filename="/home/shakhinn/CLionProjects/OOP/Model/Field.cpp">
+			<Option target="OOP"/>
+		</Unit>
+		<Unit filename="/home/shakhinn/CLionProjects/OOP/Model/Field.h">
+			<Option target="OOP"/>
+		</Unit>
+		<Unit filename="/home/shakhinn/CLionProjects/OOP/Model/Loggers/ConsolLogger.cpp">
+			<Option target="OOP"/>
+		</Unit>
+		<Unit filename="/home/shakhinn/CLionProjects/OOP/Model/Loggers/ConsolLogger.h">
+			<Option target="OOP"/>
+		</Unit>
+		<Unit filename="/home/shakhinn/CLionProjects/OOP/Model/Loggers/FileLogger.cpp">
+			<Option target="OOP"/>
+		</Unit>
+		<Unit filename="/home/shakhinn/CLionProjects/OOP/Model/Loggers/FileLogger.h">
+			<Option target="OOP"/>
+		</Unit>
+		<Unit filename="/home/shakhinn/CLionProjects/OOP/Model/Loggers/ObjectPublisher.cpp">
+			<Option target="OOP"/>
+		</Unit>
+		<Unit filename="/home/shakhinn/CLionProjects/OOP/Model/Loggers/ObjectPublisher.h">
+			<Option target="OOP"/>
+		</Unit>
+		<Unit filename="/home/shakhinn/CLionProjects/OOP/Model/Loggers/Publisher.cpp">
+			<Option target="OOP"/>
+		</Unit>
+		<Unit filename="/home/shakhinn/CLionProjects/OOP/Model/Loggers/Publisher.h">
+			<Option target="OOP"/>
+		</Unit>
+		<Unit filename="/home/shakhinn/CLionProjects/OOP/Model/Loggers/logger.cpp">
+			<Option target="OOP"/>
+		</Unit>
+		<Unit filename="/home/shakhinn/CLionProjects/OOP/Model/Loggers/logger.h">
+			<Option target="OOP"/>
+		</Unit>
+		<Unit filename="/home/shakhinn/CLionProjects/OOP/Model/Object.cpp">
+			<Option target="OOP"/>
+		</Unit>
+		<Unit filename="/home/shakhinn/CLionProjects/OOP/Model/Object.h">
+			<Option target="OOP"/>
+		</Unit>
+		<Unit filename="/home/shakhinn/CLionProjects/OOP/Model/Objects/BombObject.cpp">
+			<Option target="OOP"/>
+		</Unit>
+		<Unit filename="/home/shakhinn/CLionProjects/OOP/Model/Objects/BombObject.h">
+			<Option target="OOP"/>
+		</Unit>
+		<Unit filename="/home/shakhinn/CLionProjects/OOP/Model/Objects/CoinObject.cpp">
+			<Option target="OOP"/>
+		</Unit>
+		<Unit filename="/home/shakhinn/CLionProjects/OOP/Model/Objects/CoinObject.h">
+			<Option target="OOP"/>
+		</Unit>
+		<Unit filename="/home/shakhinn/CLionProjects/OOP/Model/Objects/EntranceObject.cpp">
+			<Option target="OOP"/>
+		</Unit>
+		<Unit filename="/home/shakhinn/CLionProjects/OOP/Model/Objects/EntranceObject.h">
+			<Option target="OOP"/>
+		</Unit>
+		<Unit filename="/home/shakhinn/CLionProjects/OOP/Model/Objects/ExitObject.cpp">
+			<Option target="OOP"/>
+		</Unit>
+		<Unit filename="/home/shakhinn/CLionProjects/OOP/Model/Objects/ExitObject.h">
+			<Option target="OOP"/>
+		</Unit>
+		<Unit filename="/home/shakhinn/CLionProjects/OOP/Model/Objects/TeleportObject.cpp">
+			<Option target="OOP"/>
+		</Unit>
+		<Unit filename="/home/shakhinn/CLionProjects/OOP/Model/Objects/TeleportObject.h">
+			<Option target="OOP"/>
+		</Unit>
+		<Unit filename="/home/shakhinn/CLionProjects/OOP/Model/Player.cpp">
+			<Option target="OOP"/>
+		</Unit>
+		<Unit filename="/home/shakhinn/CLionProjects/OOP/Model/Player.h">
+			<Option target="OOP"/>
+		</Unit>
+		<Unit filename="/home/shakhinn/CLionProjects/OOP/Model/Point.h">
+			<Option target="OOP"/>
+		</Unit>
+		<Unit filename="/home/shakhinn/CLionProjects/OOP/View/View.cpp">
+			<Option target="OOP"/>
+		</Unit>
+		<Unit filename="/home/shakhinn/CLionProjects/OOP/View/View.h">
+			<Option target="OOP"/>
+		</Unit>
+		<Unit filename="/home/shakhinn/CLionProjects/OOP/main.cpp">
+			<Option target="OOP"/>
+		</Unit>
+		<Unit filename="/home/shakhinn/CLionProjects/OOP/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+		<Unit filename="/home/shakhinn/CLionProjects/OOP/../../../../usr/lib/x86_64-linux-gnu/cmake/SFML/SFMLConfig.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\SFML\"/>
+		</Unit>
+		<Unit filename="/home/shakhinn/CLionProjects/OOP/../../../../usr/lib/x86_64-linux-gnu/cmake/SFML/SFMLConfigDependencies.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\SFML\"/>
+		</Unit>
+		<Unit filename="/home/shakhinn/CLionProjects/OOP/../../../../usr/lib/x86_64-linux-gnu/cmake/SFML/SFMLConfigVersion.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\SFML\"/>
+		</Unit>
+		<Unit filename="/home/shakhinn/CLionProjects/OOP/../../../../usr/lib/x86_64-linux-gnu/cmake/SFML/SFMLSharedTargets-none.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\SFML\"/>
+		</Unit>
+		<Unit filename="/home/shakhinn/CLionProjects/OOP/../../../../usr/lib/x86_64-linux-gnu/cmake/SFML/SFMLSharedTargets.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\SFML\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>
