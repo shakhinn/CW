@@ -18,7 +18,7 @@ void MyView::updateGraphics(Node *tree, int maxdepth){
     drawNode(tree, maxdepth);
     this->setScene(scene);
 }
-
+/*Рекурсивная функция для отрисовки дерева*/
 void MyView::drawNode(Node* node, int maxdepth, int depth, int x, int y){
     if (node == nullptr) return;
         int offset = pow(2, maxdepth + 3) / pow(2, depth);

@@ -27,7 +27,7 @@ BinaryTree::BinaryTree(std::vector<int> &arr, string& str) {
 Node * BinaryTree::getTree() {
     return tree;
 }
-
+/*Функция для созания дерева из массива.*/
 Node * BinaryTree::makeTree(int n, std::vector<int>& arr, int& pos, int indent, string& str) {
     if (n == 0) {
         for(int i = 0; i < indent; i++){str+="  ";}
@@ -90,6 +90,10 @@ void BinaryTree::findElem(int e, string& str) {
     str+="find element " + std::to_string(e) + '\n';
     find(tree, e, str);
 }
+
+/*Рекурсиваня функция для поиска элемента в дереве.
+ * Если Элемент меньше узла, то она вызывается для левого поддерева. Если больше, то для правого поддерева
+Поиск завершается, когда указатель на дерево равен nullptr или корень дерева равен элементу.*/
 bool BinaryTree::find(Node *node, int x, string& str) {
     if(node == nullptr) {
         str+="\nNo element "+ std::to_string(x) + " in bst\n";
@@ -110,6 +114,7 @@ bool BinaryTree::find(Node *node, int x, string& str) {
     return false;
 }
 
+/*функция для сохранения дерева не содержащего нужный элемент в массив*/
 void BinaryTree::treeToArrHelp(Node *node, std:: vector<int>& arr, string& str) {
     if(node != nullptr){
         treeToArrHelp(node->getLeft(), arr, str);
@@ -121,6 +126,7 @@ void BinaryTree::treeToArrHelp(Node *node, std:: vector<int>& arr, string& str) 
     }
 }
 
+/*функция для сохранения дерева в массив при добавлении элемента*/
 void BinaryTree::treeToArrAdd(Node *node, std::vector<int> &arr, int e, string& str) {
     if(node == nullptr){
         arr.push_back(e);
@@ -153,6 +159,7 @@ void BinaryTree::treeToArrAdd(Node *node, std::vector<int> &arr, int e, string& 
     }
 }
 
+/*Функция для сохранения дерева в массив при удалении элемента*/
 void BinaryTree::treeToArrDelete(Node *node, std::vector<int> &arr, int e, string& str) {
     if(node == nullptr){
         return;
@@ -180,6 +187,7 @@ void BinaryTree::treeToArrDelete(Node *node, std::vector<int> &arr, int e, strin
     }
 }
 
+/*Удаление элемента и перестройка дерева*/
 void BinaryTree::deleteElem(int e, string& str) {
     str+="Delete elem "+ std::to_string(e)+'\n';
     str+="making array\n";
@@ -199,6 +207,7 @@ void BinaryTree::deleteElem(int e, string& str) {
 
 }
 
+/*Добавление элемента и престройка дерева*/
 void BinaryTree::addElem(int e, string& str) {
     str+="Add elem "+ std::to_string(e)+'\n';
     std::vector<int> arr;
